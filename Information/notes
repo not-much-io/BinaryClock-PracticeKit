@@ -1,0 +1,70 @@
+Some Notes:
+
+*A binary clock is a clock that displays the digits of a normal digital clock in binary.
+
+[ ][ ][ ][ ][ ][ ]   <-2^3=8
+[ ][ ][ ][ ][ ][ ]   <-2^2=4
+[ ][ ][ ][ ][ ][ ]   <-2^1=2
+[ ][ ][ ][ ][ ][ ]   <-2^0=1
+ H  H  m  m  s  s
+
+ex. If the time is 15:49:33
+
+[ ][ ][ ][x][ ][ ]   <-2^3=8
+[ ][x][x][ ][ ][ ]   <-2^2=4
+[ ][ ][ ][ ][x][x]   <-2^1=2
+[x][x][ ][x][x][x]   <-2^0=1
+ H  H  m  m  s  s
+
+*A key matrix is used to bind significance to some segments of a message for
+translation into a call to some functionality.
+
+BinaryClock KeyMatrix:
+
+FuncBlock   FuncId  Parameters  Name
+
+00                              Clock Functions
+            00      None        _clock_mode_on
+            01      0-MAX_INT   _set_time_modification
+            10      None        _unset_time_modification
+
+01                              Alarm Functions
+            00      0-86400     _set_alarm
+            01      None        _cancel_alarm
+            10      None        _alarm_notification_off
+
+10                              Timer Functions
+            00      None        _timer_mode_on
+            01      0-MAX_INT   _start_timer
+            10      None        _stop_timer
+            11      None        _timer_notification_off
+
+11                              Stopper Functions
+            00      None        _stopper_mode_on
+            01      None        _start_stopper
+            10      None        _stop_stopper
+
+Examples:
+
+The message: 0000 is a call to Clock Functions function _clock_mode_on()
+
+The message: 10011010 is a call to Timer Functions function _start_timer() with the parameter 1010.
+
+*My environment: KaOS, PyCharm Community edition, Python3
+
+*By "matrix" I mean an iterable inside another iterable, in this exercise a string inside a list.
+
+*This is a guideline architecture, feel free to change anything, both making improvements and/or simplifications.
+
+*You will need Qt5 for the GUI to work, undet linux sudo apt-get install Qt5 of sudo pacman -S Qt5 etc. , windows:
+http://qt-project.org/downloads
+
+*You will need PyQt5 for the GUI to work, under linux sudo apt-get install PyQt5 or sudo pacman -S PyQt5 etc. , windows:
+http://www.riverbankcomputing.co.uk/software/pyqt/download5
+
+*If it is too much hassle, you could just use a terminal version (create infinite loop and print out a matrix), though
+ IMHO the GUI is worth the gratification. ;)
+
+*My first time using Qt, something could be broken, though I implemented it and it worked as expected for me.
+
+Have Fun!
